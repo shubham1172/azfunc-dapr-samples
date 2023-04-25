@@ -10,8 +10,7 @@
             "type": "daprState",
             "stateStore": "%StateStoreName%",
             "direction": "out",
-            "name": "order",
-            "key": "order"
+            "name": "order"
         }
     ]
 }

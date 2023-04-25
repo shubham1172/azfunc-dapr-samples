@@ -12,7 +12,9 @@ namespace DotnetApp
 {
     public static class StoreFunc
     {
-        public record Order([property: JsonPropertyName("orderId")] int OrderId);
+        public record Order([property: JsonPropertyName("orderId")] int OrderId,
+                            [property: JsonPropertyName("quantity")] int Quantity,
+                            [property: JsonPropertyName("itemName")] string ItemName);
 
         [FunctionName("StoreFunc")]
         public static async Task<IActionResult> Run(
@@ -25,11 +27,11 @@ namespace DotnetApp
             Console.WriteLine("before for loop");
             for (int i = 1; i <= 3; i++)
             {
-                var order = new Order(i);
+                var order = new Order(i, i * 10, "item" + i);
                 var orderString = System.Text.Json.JsonSerializer.Serialize(order);
                 var outputContent = new InvokeMethodParameters
                 {
-                    Body = orderString
+                    Body = order,
                 };
 
                 await output.AddAsync(outputContent);
