@@ -1,7 +1,7 @@
 # azfunc-dapr-samples
 Samples on using the Dapr extension for Azure Functions
 
-## Using the samples
+## Running the sample locally
 
 Start the NodeApp
 ```bash
@@ -14,4 +14,16 @@ Start the Dotnet App
 ```bash
 cd samples/DotnetApp
 dapr run --app-id dotnetapp --dapr-http-port 3501 -- func start --verbose -p 7071
+```
+
+## Running the sample on ACA
+
+### Building from source
+
+```bash
+docker build -t ghcr.io/shubham1172/azfunc-sample/nodeapp:0.1.0 -f samples/NodeApp/Dockerfile ./samples/NodeApp
+docker build -t ghcr.io/shubham1172/azfunc-sample/dotnetapp:0.1.0 -f samples/DotnetApp/Dockerfile ./samples/DotnetApp
+
+docker push ghcr.io/shubham1172/azfunc-sample/nodeapp:0.1.0
+docker push ghcr.io/shubham1172/azfunc-sample/dotnetapp:0.1.0
 ```

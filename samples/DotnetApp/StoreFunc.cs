@@ -28,7 +28,6 @@ namespace DotnetApp
             for (int i = 1; i <= 3; i++)
             {
                 var order = new Order(i, i * 10, "item" + i);
-                var orderString = System.Text.Json.JsonSerializer.Serialize(order);
                 var outputContent = new InvokeMethodParameters
                 {
                     Body = order,
