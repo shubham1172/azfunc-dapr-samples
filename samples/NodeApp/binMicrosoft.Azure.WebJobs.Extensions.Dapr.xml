@@ -311,10 +311,247 @@
             </summary>
             <param name="builder">The <see cref="T:Microsoft.Azure.WebJobs.IWebJobsBuilder"/> to configure.</param>
         </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.Dapr.Exceptions.DaprException">
+            <summary>
+            Dapr exception.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Exceptions.DaprException.#ctor(System.Net.HttpStatusCode,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.Dapr.Exceptions.DaprException"/> class.
+            </summary>
+            <param name="statusCode">Status code.</param>
+            <param name="errorCode">Error code.</param>
+            <param name="message">Message.</param>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Exceptions.DaprException.#ctor(System.Net.HttpStatusCode,System.String,System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.Dapr.Exceptions.DaprException"/> class.
+            </summary>
+            <param name="statusCode">Status code.</param>
+            <param name="errorCode">Error code.</param>
+            <param name="message">Message.</param>
+            <param name="innerException">Inner exception.</param>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.Dapr.Exceptions.DaprException.StatusCode">
+            <summary>
+            Gets or sets http status code.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.Dapr.Exceptions.DaprException.ErrorCode">
+            <summary>
+            Gets or sets error code.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Exceptions.DaprException.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.DaprSidecarNotPresentException">
+            <summary>
+            Dapr sidecar not present exception.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.DaprSidecarNotPresentException.#ctor(System.Net.HttpStatusCode,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.DaprSidecarNotPresentException"/> class.
+            </summary>
+            <param name="statusCode">Status code.</param>
+            <param name="errorCode">Error code.</param>
+            <param name="message">Message.</param>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.DaprSidecarNotPresentException.#ctor(System.Net.HttpStatusCode,System.String,System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.DaprSidecarNotPresentException"/> class.
+            </summary>
+            <param name="statusCode">Status code.</param>
+            <param name="errorCode">Error code.</param>
+            <param name="message">Message.</param>
+            <param name="innerException">Inner exception.</param>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.DaprHttpClient">
+            <summary>
+            Dapr client.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.DaprHttpClient.#ctor(System.Net.Http.IHttpClientFactory)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.DaprHttpClient"/> class.
+            </summary>
+            <param name="clientFactory">Client factory.</param>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.DaprHttpClient.PostAsync(System.String,System.Net.Http.StringContent,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.DaprHttpClient.GetAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.DaprHttpClient.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.DaprServiceClient">
+            <summary>
+            Dapr service client.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.DaprServiceClient.#ctor(Microsoft.Azure.WebJobs.Extensions.Dapr.Services.IDaprClient,Microsoft.Azure.WebJobs.INameResolver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.DaprServiceClient"/> class.
+            </summary>
+            <param name="daprClient">Dapr client.</param>
+            <param name="nameResolver">Name resolver.</param>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.DaprServiceClient.SaveStateAsync(System.String,System.String,System.Collections.Generic.IEnumerable{Microsoft.Azure.WebJobs.Extensions.Dapr.DaprStateRecord},System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.DaprServiceClient.GetStateAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.DaprServiceClient.InvokeMethodAsync(System.String,System.String,System.String,System.String,System.Object,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.DaprServiceClient.SendToDaprBindingAsync(System.String,Microsoft.Azure.WebJobs.Extensions.Dapr.DaprBindingMessage,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.DaprServiceClient.PublishEventAsync(System.String,System.String,System.String,System.Nullable{System.Text.Json.JsonElement},System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.DaprServiceClient.GetSecretAsync(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
         <member name="T:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.DaprServiceListener.DaprTopicSubscriptionComparer">
             <summary>
             Helper class to define comparer of Dapr Topic Subscription.
             </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.IDaprClient">
+            <summary>
+            Dapr client interface.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.IDaprClient.GetAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Dapr Http Get call.
+            </summary>
+            <param name="uri">Dapr endpoint.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.IDaprClient.PostAsync(System.String,System.Net.Http.StringContent,System.Threading.CancellationToken)">
+            <summary>
+            Dapr Http Post call.
+            </summary>
+            <param name="uri">Dapr endpoint.</param>
+            <param name="stringContent">String content.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.IDaprClient.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+            <summary>
+            Dapr Http Send call.
+            </summary>
+            <param name="httpRequestMessage">HttpRequestMessage.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous operation.</returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.IDaprServiceClient">
+            <summary>
+            DaprServiceClient interface.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.IDaprServiceClient.SaveStateAsync(System.String,System.String,System.Collections.Generic.IEnumerable{Microsoft.Azure.WebJobs.Extensions.Dapr.DaprStateRecord},System.Threading.CancellationToken)">
+            <summary>
+            Save state to a Dapr state store.
+            </summary>
+            <param name="daprAddress">Dapr address.</param>
+            <param name="stateStore">State store name.</param>
+            <param name="values">Values.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.IDaprServiceClient.GetStateAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get state from a Dapr state store.
+            </summary>
+            <param name="daprAddress">Dapr address.</param>
+            <param name="stateStore">State store name.</param>
+            <param name="key">Key.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task`1"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.IDaprServiceClient.InvokeMethodAsync(System.String,System.String,System.String,System.String,System.Object,System.Threading.CancellationToken)">
+            <summary>
+            Invoke a Dapr service method.
+            </summary>
+            <param name="daprAddress">Dapr address.</param>
+            <param name="appId">AppId.</param>
+            <param name="methodName">Method name.</param>
+            <param name="httpVerb">Http verb.</param>
+            <param name="body">Body.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.IDaprServiceClient.SendToDaprBindingAsync(System.String,Microsoft.Azure.WebJobs.Extensions.Dapr.DaprBindingMessage,System.Threading.CancellationToken)">
+            <summary>
+            Send message to Dapr binding.
+            </summary>
+            <param name="daprAddress">Dapr address.</param>
+            <param name="message">Message.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.IDaprServiceClient.PublishEventAsync(System.String,System.String,System.String,System.Nullable{System.Text.Json.JsonElement},System.Threading.CancellationToken)">
+            <summary>
+            Publish event to Dapr pub/sub.
+            </summary>
+            <param name="daprAddress">Dapr address.</param>
+            <param name="name">Name.</param>
+            <param name="topicName">Topic name.</param>
+            <param name="payload">Payload.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.IDaprServiceClient.GetSecretAsync(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get secret from Dapr secret store.
+            </summary>
+            <param name="daprAddress">Dapr address.</param>
+            <param name="secretStoreName">Secret store name.</param>
+            <param name="key">Key.</param>
+            <param name="metadata">Metadata.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task`1"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.IDaprServiceListener">
+            <summary>
+            DaprServiceListener interface.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.IDaprServiceListener.AddFunctionListener(Microsoft.Azure.WebJobs.Extensions.Dapr.DaprListenerBase)">
+            <summary>
+            Add function listener.
+            </summary>
+            <param name="daprListener">Dapr listener.</param>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.IDaprServiceListener.DeregisterListenerAsync(Microsoft.Azure.WebJobs.Extensions.Dapr.DaprListenerBase,System.Threading.CancellationToken)">
+            <summary>
+            Deregister listener.
+            </summary>
+            <param name="listener">Listener.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.IDaprServiceListener.EnsureStartedAsync(System.Threading.CancellationToken)">
+            <summary>
+            Ensure server is started.
+            </summary>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.IDaprServiceListener.RegisterTopic(Microsoft.Azure.WebJobs.Extensions.Dapr.DaprTopicSubscription)">
+            <summary>
+            Register topic.
+            </summary>
+            <param name="topic">Topic.</param>
         </member>
         <member name="T:Microsoft.Azure.WebJobs.Extensions.Dapr.DaprBindingTriggerAttribute">
             <summary>
@@ -397,11 +634,51 @@
             Gets or sets the route for the trigger. If unspecified the topic name will be used.
             </summary>
         </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.Dapr.Utils.ErrorCodes">
+            <summary>
+            Contains DAPR error codes.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.WebJobs.Extensions.Dapr.Utils.ErrorCodes.ErrDaprSidecarDoesNotExist">
+            <summary>
+            Dapr sidecar does not exist.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.WebJobs.Extensions.Dapr.Utils.ErrorCodes.ErrDaprRequestFailed">
+            <summary>
+            Dapr request failed.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.WebJobs.Extensions.Dapr.Utils.ErrorCodes.ErrDaprResourceDoesNotExist">
+            <summary>
+            Dapr resource does not exist.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.WebJobs.Extensions.Dapr.Utils.ErrorCodes.ErrUnknown">
+            <summary>
+            Unknown Error.
+            </summary>
+        </member>
         <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Utils.JsonElementConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
             <inheritdoc/>
         </member>
         <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Utils.JsonElementConverter.Write(System.Text.Json.Utf8JsonWriter,System.Text.Json.JsonElement,System.Text.Json.JsonSerializerOptions)">
             <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.Dapr.Utils.JsonUtils">
+            <summary>
+            Utility methods for JSON serialization.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.WebJobs.Extensions.Dapr.Utils.JsonUtils.DefaultSerializerOptions">
+            <summary>
+            Default <see cref="T:System.Text.Json.JsonSerializerOptions"/> used for serialization.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.Dapr.Utils.JsonUtils.JsonElementConverter">
+            <summary>
+            A <see cref="T:System.Text.Json.Serialization.JsonConverter`1"/> for <see cref="T:System.Text.Json.JsonElement"/>.
+            </summary>
         </member>
         <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Utils.JsonUtils.JsonElementConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
             <inheritdoc/>

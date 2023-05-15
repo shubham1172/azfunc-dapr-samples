@@ -1,0 +1,24 @@
+### Save state
+POST http://localhost:7071/api/state/hello
+
+Hello World
+
+### Get State
+GET http://localhost:7071/api/state/hello
+
+### Invoke function2
+GET http://localhost:7071/api/invoke/hello
+
+### Test dapr GET
+GET http://localhost:3500/v1.0/state/statestore/hello
+
+### Test dapr POST
+POST http://localhost:3500/v1.0/state/statestore
+Content-Type: application/json
+
+[
+    {
+        "Key": "hello",
+        "Value": "Hello World"
+    }
+]

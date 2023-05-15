@@ -1,0 +1,26 @@
+{
+  "bindings": [
+    {
+      "type": "httpTrigger",
+      "route": "state/{key}",
+      "methods": [
+        "post"
+      ],
+      "authLevel": "function",
+      "name": "req"
+    },
+    {
+      "type": "daprState",
+      "direction": "out",
+      "name": "dapr",
+      "stateStore": "statestore",
+      "key": "{key}",
+      "daprAddress": "%daprAddress%"
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "bindings": [
+    {
+      "name": "daprTrigger",
+      "type": "daprTopicTrigger",
+      "pubsubname": "pubsub",
+      "topic": "myTopic",
+      "route": "/myroute"
+    }
+  ]
+}

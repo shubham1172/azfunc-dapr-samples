@@ -1,0 +1,20 @@
+{
+  "scriptFile": "__init__.py",
+  "bindings": [
+    {
+      "type": "daprTopicTrigger",
+      "pubsubname": "messagebus",
+      "topic": "A",
+      "name": "subEvent",
+      "direction": "in",
+      "dataType": "string"
+    },
+    {
+      "type": "daprPublish",
+      "direction": "out",
+      "name": "pubEvent",
+      "pubsubname": "messagebus",
+      "topic": "B"
+    }
+  ]
+}

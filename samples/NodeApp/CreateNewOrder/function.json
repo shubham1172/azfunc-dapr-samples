@@ -8,7 +8,7 @@
         },
         {
             "type": "daprState",
-            "stateStore": "%StateStoreName%",
+            "stateStore": "statestore",
             "direction": "out",
             "name": "order"
         }
