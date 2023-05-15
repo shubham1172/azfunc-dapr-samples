@@ -9,6 +9,7 @@ namespace Microsoft.Azure.WebJobs.Extensions.Dapr
     using System.Collections.Concurrent;
     using System.Threading;
     using System.Threading.Tasks;
+    using Microsoft.Azure.Functions.Extensions.Dapr.Core;
     using Microsoft.Azure.WebJobs;
     using Microsoft.Azure.WebJobs.Extensions.Dapr.Services;
 
@@ -16,12 +17,12 @@ namespace Microsoft.Azure.WebJobs.Extensions.Dapr
     {
         readonly ConcurrentQueue<DaprBindingMessage> requests = new ConcurrentQueue<DaprBindingMessage>();
         readonly DaprBindingAttribute attr;
-        readonly IDaprServiceClient daprService;
+        readonly IDaprServiceClient daprServiceClient;
 
-        public DaprBindingAsyncCollector(DaprBindingAttribute attr, IDaprServiceClient daprService)
+        public DaprBindingAsyncCollector(DaprBindingAttribute attr, IDaprServiceClient daprServiceClient)
         {
             this.attr = attr;
-            this.daprService = daprService;
+            this.daprServiceClient = daprServiceClient;
         }
 
         public Task AddAsync(DaprBindingMessage item, CancellationToken cancellationToken = default)
@@ -37,7 +38,7 @@ namespace Microsoft.Azure.WebJobs.Extensions.Dapr
         {
             while (this.requests.TryDequeue(out DaprBindingMessage item))
             {
-                await this.daprService.SendToDaprBindingAsync(
+                await this.daprServiceClient.SendToDaprBindingAsync(
                     this.attr.DaprAddress,
                     item!,
                     cancellationToken);

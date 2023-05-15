@@ -11,26 +11,33 @@ namespace DaprExtensionTests.UnitTests.Services
     using System.Text.Json;
     using System.Threading;
     using System.Threading.Tasks;
+    using Microsoft.Azure.Functions.Extensions.Dapr.Core;
+    using Microsoft.Azure.Functions.Extensions.Dapr.Core.Utils;
     using Microsoft.Azure.WebJobs;
     using Microsoft.Azure.WebJobs.Extensions.Dapr;
     using Microsoft.Azure.WebJobs.Extensions.Dapr.Exceptions;
     using Microsoft.Azure.WebJobs.Extensions.Dapr.Services;
-    using Microsoft.Azure.WebJobs.Extensions.Dapr.Utils;
+    using Microsoft.Extensions.Logging;
     using Moq;
     using Xunit;
 
     public class DaprServiceClientTests
     {
+        private readonly Mock<ILoggerFactory> loggerFactoryMock;
         private readonly Mock<INameResolver> nameResolverMock;
         private readonly Mock<IDaprClient> daprClientMock;
         private readonly DaprServiceClient daprServiceClient;
 
         public DaprServiceClientTests()
         {
+            this.loggerFactoryMock = new Mock<ILoggerFactory>();
+            loggerFactoryMock.Setup(x => x.CreateLogger(It.IsAny<string>())).Returns(new Mock<ILogger>().Object);
+
             this.nameResolverMock = new Mock<INameResolver>();
             this.daprClientMock = new Mock<IDaprClient>();
 
             this.daprServiceClient = new DaprServiceClient(
+                this.loggerFactoryMock.Object,
                 this.daprClientMock.Object,
                 this.nameResolverMock.Object);
         }
@@ -100,7 +107,7 @@ namespace DaprExtensionTests.UnitTests.Services
             this.daprClientMock.Setup(client => client.GetAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(response);
 
-            var daprServiceClient = new DaprServiceClient(this.daprClientMock.Object, this.nameResolverMock.Object);
+            var daprServiceClient = new DaprServiceClient(this.loggerFactoryMock.Object, this.daprClientMock.Object, this.nameResolverMock.Object);
 
             // Act
             var result = await daprServiceClient.GetStateAsync(daprAddress, stateStore, key, cancellationToken);
@@ -130,7 +137,7 @@ namespace DaprExtensionTests.UnitTests.Services
             this.daprClientMock.Setup(client => client.GetAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
                                .ThrowsAsync(new DaprException(HttpStatusCode.InternalServerError, errorCode, "An error occurred"));
 
-            var daprServiceClient = new DaprServiceClient(this.daprClientMock.Object, this.nameResolverMock.Object);
+            var daprServiceClient = new DaprServiceClient(this.loggerFactoryMock.Object, this.daprClientMock.Object, this.nameResolverMock.Object);
 
             // Act
             var ex = await Assert.ThrowsAsync<DaprException>(() =>
@@ -151,7 +158,7 @@ namespace DaprExtensionTests.UnitTests.Services
             string expectedDaprAddress = "http://test-dapr-address";
             CancellationToken cancellationToken = CancellationToken.None;
 
-            var daprServiceClient = new DaprServiceClient(this.daprClientMock.Object, this.nameResolverMock.Object);
+            var daprServiceClient = new DaprServiceClient(this.loggerFactoryMock.Object, this.daprClientMock.Object, this.nameResolverMock.Object);
 
             // Act
             await daprServiceClient.InvokeMethodAsync(expectedDaprAddress, expectedAppId, expectedMethodName, expectedHttpVerb, expectedBody, cancellationToken);
@@ -176,7 +183,7 @@ namespace DaprExtensionTests.UnitTests.Services
             this.daprClientMock.Setup(client => client.PostAsync(It.IsAny<string>(), It.IsAny<StringContent>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(new HttpResponseMessage(HttpStatusCode.OK));
 
-            var daprServiceClient = new DaprServiceClient(this.daprClientMock.Object, this.nameResolverMock.Object);
+            var daprServiceClient = new DaprServiceClient(this.loggerFactoryMock.Object, this.daprClientMock.Object, this.nameResolverMock.Object);
 
             // Act
             await daprServiceClient.SendToDaprBindingAsync(expectedDaprAddress, expectedMessage, cancellationToken);
@@ -198,7 +205,7 @@ namespace DaprExtensionTests.UnitTests.Services
             this.daprClientMock.Setup(client => client.SendAsync(It.IsAny<HttpRequestMessage>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(new HttpResponseMessage(HttpStatusCode.OK));
 
-            var daprServiceClient = new DaprServiceClient(this.daprClientMock.Object, this.nameResolverMock.Object);
+            var daprServiceClient = new DaprServiceClient(this.loggerFactoryMock.Object, this.daprClientMock.Object, this.nameResolverMock.Object);
 
             // Act
             await daprServiceClient.PublishEventAsync(expectedDaprAddress, expectedName, expectedTopicName,
@@ -225,7 +232,7 @@ namespace DaprExtensionTests.UnitTests.Services
             this.daprClientMock.Setup(client => client.GetAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(httpResponse);
 
-            var daprServiceClient = new DaprServiceClient(this.daprClientMock.Object, this.nameResolverMock.Object);
+            var daprServiceClient = new DaprServiceClient(this.loggerFactoryMock.Object, this.daprClientMock.Object, this.nameResolverMock.Object);
 
             // Act
             JsonDocument actual = await daprServiceClient.GetSecretAsync(expectedDaprAddress, expectedSecretStoreName, expectedKey, expectedMetadata, cancellationToken);

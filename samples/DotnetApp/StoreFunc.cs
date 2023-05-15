@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Azure.WebJobs.Extensions.Dapr;
 using System.Text.Json.Serialization;
+using Microsoft.Azure.Functions.Extensions.Dapr.Core;
 
 namespace DotnetApp
 {

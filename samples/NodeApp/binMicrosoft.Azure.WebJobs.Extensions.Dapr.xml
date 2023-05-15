@@ -69,42 +69,6 @@
             Gets or sets the configured operation.
             </summary>
         </member>
-        <member name="T:Microsoft.Azure.WebJobs.Extensions.Dapr.DaprBindingMessage">
-            <summary>
-            Parameters for invoking a Dapr binding.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.DaprBindingMessage.#ctor(System.Object,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.Dapr.DaprBindingMessage"/> class.
-            </summary>
-            <param name="data">The data of the message sent to the Dapr binding.</param>
-            <param name="metadata">The bag of key value pairs for binding-specific metadata.</param>
-            <param name="binding">The name of binding.</param>
-            <param name="operation">The operation to do with the Dapr binding.</param>
-            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="data"/> is null.</exception>
-            <exception cref="T:System.ArgumentException">Thrown if <paramref name="data"/> is not serializable to JSON.</exception>
-        </member>
-        <member name="P:Microsoft.Azure.WebJobs.Extensions.Dapr.DaprBindingMessage.Data">
-            <summary>
-            Gets or sets the data .
-            </summary>
-        </member>
-        <member name="P:Microsoft.Azure.WebJobs.Extensions.Dapr.DaprBindingMessage.Operation">
-            <summary>
-            Gets or sets the operation.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Azure.WebJobs.Extensions.Dapr.DaprBindingMessage.Metadata">
-            <summary>
-            Gets or sets the metadata required for this operation.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Azure.WebJobs.Extensions.Dapr.DaprBindingMessage.BindingName">
-            <summary>
-            Gets or sets the name of the binding.
-            </summary>
-        </member>
         <member name="T:Microsoft.Azure.WebJobs.Extensions.Dapr.DaprInvokeAttribute">
             <summary>
             Attribute to specify parameters for the Dapr-invoke output binding.
@@ -139,47 +103,6 @@
             <summary>
             Gets or sets the name of the topic to publish to.
             </summary>
-        </member>
-        <member name="T:Microsoft.Azure.WebJobs.Extensions.Dapr.DaprPubSubEvent">
-            <summary>
-            Payload for outbound Dapr pub/sub events.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.DaprPubSubEvent.#ctor(System.Object,System.String,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.Dapr.DaprPubSubEvent"/> class.
-            </summary>
-            <param name="payload">The payload of the outbound pub/sub event.</param>
-            <param name="pubSubName">The pub/sub name of the outbound pub/sub event.</param>
-            <param name="topic">The topic of the outbound pub/sub event.</param>
-            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="payload"/> is null.</exception>
-            <exception cref="T:System.ArgumentException">Thrown if <paramref name="payload"/> is not serializable to JSON.</exception>
-        </member>
-        <member name="P:Microsoft.Azure.WebJobs.Extensions.Dapr.DaprPubSubEvent.PubSubName">
-            <summary>
-            Gets the name of the pub/sub.
-            </summary>
-            <remarks>
-            If the pub/sub name is not specified, it is inferred from the
-            <see cref="T:Microsoft.Azure.WebJobs.Extensions.Dapr.DaprPublishAttribute"/> binding attribute.
-            </remarks>
-        </member>
-        <member name="P:Microsoft.Azure.WebJobs.Extensions.Dapr.DaprPubSubEvent.Topic">
-            <summary>
-            Gets the name of the topic.
-            </summary>
-            <remarks>
-            If the topic name is not specified, it is inferred from the
-            <see cref="T:Microsoft.Azure.WebJobs.Extensions.Dapr.DaprPublishAttribute"/> binding attribute.
-            </remarks>
-        </member>
-        <member name="P:Microsoft.Azure.WebJobs.Extensions.Dapr.DaprPubSubEvent.Payload">
-            <summary>
-            Gets the payload of the pub/sub event.
-            </summary>
-            <remarks>
-            The subscribers will receive this payload as the body of a Cloud Event envelope.
-            </remarks>
         </member>
         <member name="T:Microsoft.Azure.WebJobs.Extensions.Dapr.DaprSecretAttribute">
             <summary>
@@ -256,31 +179,6 @@
         <member name="P:Microsoft.Azure.WebJobs.Extensions.Dapr.DaprStateRecord.ETag">
             <summary>
             Gets the etag value of the state record.
-            </summary>
-        </member>
-        <member name="T:Microsoft.Azure.WebJobs.Extensions.Dapr.InvokeMethodParameters">
-            <summary>
-            Parameters for Dapr invoke-method operations.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Azure.WebJobs.Extensions.Dapr.InvokeMethodParameters.AppId">
-            <summary>
-            Gets or sets the ID of the app containing the method to invoke.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Azure.WebJobs.Extensions.Dapr.InvokeMethodParameters.MethodName">
-            <summary>
-            Gets or sets the name of the method to invoke.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Azure.WebJobs.Extensions.Dapr.InvokeMethodParameters.HttpVerb">
-            <summary>
-            Gets or sets the HTTP verb associated with the method to invoke.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Azure.WebJobs.Extensions.Dapr.InvokeMethodParameters.Body">
-            <summary>
-            Gets or sets the body of the invoke-method operation.
             </summary>
         </member>
         <member name="T:Microsoft.Azure.WebJobs.Extensions.Dapr.DaprExtensionConfigProvider">
@@ -373,10 +271,11 @@
             Dapr client.
             </summary>
         </member>
-        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.DaprHttpClient.#ctor(System.Net.Http.IHttpClientFactory)">
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.DaprHttpClient.#ctor(Microsoft.Extensions.Logging.ILoggerFactory,System.Net.Http.IHttpClientFactory)">
             <summary>
             Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.DaprHttpClient"/> class.
             </summary>
+            <param name="loggerFactory">Logger factory.</param>
             <param name="clientFactory">Client factory.</param>
         </member>
         <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.DaprHttpClient.PostAsync(System.String,System.Net.Http.StringContent,System.Threading.CancellationToken)">
@@ -393,10 +292,11 @@
             Dapr service client.
             </summary>
         </member>
-        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.DaprServiceClient.#ctor(Microsoft.Azure.WebJobs.Extensions.Dapr.Services.IDaprClient,Microsoft.Azure.WebJobs.INameResolver)">
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.DaprServiceClient.#ctor(Microsoft.Extensions.Logging.ILoggerFactory,Microsoft.Azure.WebJobs.Extensions.Dapr.Services.IDaprClient,Microsoft.Azure.WebJobs.INameResolver)">
             <summary>
             Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.DaprServiceClient"/> class.
             </summary>
+            <param name="loggerFactory">Logger factory.</param>
             <param name="daprClient">Dapr client.</param>
             <param name="nameResolver">Name resolver.</param>
         </member>
@@ -409,7 +309,7 @@
         <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.DaprServiceClient.InvokeMethodAsync(System.String,System.String,System.String,System.String,System.Object,System.Threading.CancellationToken)">
             <inheritdoc/>
         </member>
-        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.DaprServiceClient.SendToDaprBindingAsync(System.String,Microsoft.Azure.WebJobs.Extensions.Dapr.DaprBindingMessage,System.Threading.CancellationToken)">
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.DaprServiceClient.SendToDaprBindingAsync(System.String,Microsoft.Azure.Functions.Extensions.Dapr.Core.DaprBindingMessage,System.Threading.CancellationToken)">
             <inheritdoc/>
         </member>
         <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.DaprServiceClient.PublishEventAsync(System.String,System.String,System.String,System.Nullable{System.Text.Json.JsonElement},System.Threading.CancellationToken)">
@@ -490,7 +390,7 @@
             <param name="cancellationToken">Cancellation token.</param>
             <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the result of the asynchronous operation.</returns>
         </member>
-        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.IDaprServiceClient.SendToDaprBindingAsync(System.String,Microsoft.Azure.WebJobs.Extensions.Dapr.DaprBindingMessage,System.Threading.CancellationToken)">
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.IDaprServiceClient.SendToDaprBindingAsync(System.String,Microsoft.Azure.Functions.Extensions.Dapr.Core.DaprBindingMessage,System.Threading.CancellationToken)">
             <summary>
             Send message to Dapr binding.
             </summary>
@@ -547,7 +447,7 @@
             <param name="cancellationToken">Cancellation token.</param>
             <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the result of the asynchronous operation.</returns>
         </member>
-        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.IDaprServiceListener.RegisterTopic(Microsoft.Azure.WebJobs.Extensions.Dapr.DaprTopicSubscription)">
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Services.IDaprServiceListener.RegisterTopic(Microsoft.Azure.Functions.Extensions.Dapr.Core.DaprTopicSubscription)">
             <summary>
             Register topic.
             </summary>
@@ -578,35 +478,6 @@
             <remarks>
             If not specified, the name of the function is used as the method name.
             </remarks>
-        </member>
-        <member name="T:Microsoft.Azure.WebJobs.Extensions.Dapr.DaprTopicSubscription">
-            <summary>
-            Dapr Topic Subscription returned when Dapr discover the topic subscriptions.
-            https://docs.dapr.io/reference/api/pubsub_api/#provide-a-route-for-dapr-to-discover-topic-subscriptions.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.DaprTopicSubscription.#ctor(System.String,System.String,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.Dapr.DaprTopicSubscription"/> class.
-            </summary>
-            <param name="pubSubName">The name of the pub/sub.</param>
-            <param name="topic">The topic of the topic subscription.</param>
-            <param name="route">The route corresponds to this topic subscription.</param>
-        </member>
-        <member name="P:Microsoft.Azure.WebJobs.Extensions.Dapr.DaprTopicSubscription.PubSubName">
-            <summary>
-            Gets the pub/sub name.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Azure.WebJobs.Extensions.Dapr.DaprTopicSubscription.Topic">
-            <summary>
-            Gets topic name.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Azure.WebJobs.Extensions.Dapr.DaprTopicSubscription.Route">
-            <summary>
-            Gets topic route.
-            </summary>
         </member>
         <member name="T:Microsoft.Azure.WebJobs.Extensions.Dapr.DaprTopicTriggerAttribute">
             <summary>
@@ -654,37 +525,39 @@
             Dapr resource does not exist.
             </summary>
         </member>
+        <member name="F:Microsoft.Azure.WebJobs.Extensions.Dapr.Utils.ErrorCodes.ErrDaprBadRequest">
+            <summary>
+            Bad request.
+            </summary>
+        </member>
         <member name="F:Microsoft.Azure.WebJobs.Extensions.Dapr.Utils.ErrorCodes.ErrUnknown">
             <summary>
             Unknown Error.
             </summary>
         </member>
-        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Utils.JsonElementConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Utils.JsonElementConverter.Write(System.Text.Json.Utf8JsonWriter,System.Text.Json.JsonElement,System.Text.Json.JsonSerializerOptions)">
-            <inheritdoc/>
-        </member>
-        <member name="T:Microsoft.Azure.WebJobs.Extensions.Dapr.Utils.JsonUtils">
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.Dapr.Utils.LoggingUtils">
             <summary>
-            Utility methods for JSON serialization.
+            Utility methods for logging.
             </summary>
         </member>
-        <member name="F:Microsoft.Azure.WebJobs.Extensions.Dapr.Utils.JsonUtils.DefaultSerializerOptions">
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Utils.LoggingUtils.CreateDaprBindingCategory">
             <summary>
-            Default <see cref="T:System.Text.Json.JsonSerializerOptions"/> used for serialization.
+            Creates a category name for Dapr bindings to be used in logging.
             </summary>
+            <returns>A category name for Dapr bindings.</returns>
         </member>
-        <member name="T:Microsoft.Azure.WebJobs.Extensions.Dapr.Utils.JsonUtils.JsonElementConverter">
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Utils.LoggingUtils.CreateDaprTriggerCategory">
             <summary>
-            A <see cref="T:System.Text.Json.Serialization.JsonConverter`1"/> for <see cref="T:System.Text.Json.JsonElement"/>.
+            Creates a category name for Dapr triggers to be used in logging.
             </summary>
+            <returns>A category name for Dapr triggers.</returns>
         </member>
-        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Utils.JsonUtils.JsonElementConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Utils.JsonUtils.JsonElementConverter.Write(System.Text.Json.Utf8JsonWriter,System.Text.Json.JsonElement,System.Text.Json.JsonSerializerOptions)">
-            <inheritdoc/>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.Dapr.Utils.LoggingUtils.CreateDaprTriggerCategory(System.String)">
+            <summary>
+            Creates a category name for Dapr triggers to be used in logging.
+            </summary>
+            <param name="triggerType">The type of the trigger.</param>
+            <returns>A category name for Dapr triggers.</returns>
         </member>
     </members>
 </doc>

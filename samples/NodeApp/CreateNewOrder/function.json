@@ -2,15 +2,22 @@
     "bindings": [
         {
             "type": "daprServiceInvocationTrigger",
-            "name": "payload",
             "direction": "in",
+            "name": "payload",
             "methodName": "CreateNewOrder"
         },
         {
             "type": "daprState",
-            "stateStore": "statestore",
             "direction": "out",
-            "name": "order"
+            "name": "saveOrder",
+            "stateStore": "statestore"
+        },
+        {
+            "type": "daprPublish",
+            "direction": "out",
+            "name": "publishOrder",
+            "pubsubname": "pubsub",
+            "topic": "orders"
         }
     ]
 }
