@@ -13,7 +13,7 @@ dapr run --app-id nodeapp --app-port 3001 --app-protocol http --dapr-http-port 3
 Start the Dotnet App
 ```bash
 cd samples/DotnetApp
-dapr run --app-id dotnetapp --dapr-http-port 3501 -- func start --verbose -p 7071
+DAPR_APP_PORT=3002 dapr run --app-id dotnetapp --app-port 3002 --app-protocol http --dapr-http-port 3501 -- func start --verbose -p 7071
 ```
 
 Invoke the Dotnet App

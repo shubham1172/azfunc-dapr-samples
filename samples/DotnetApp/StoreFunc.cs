@@ -6,24 +6,19 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Azure.WebJobs.Extensions.Dapr;
-using System.Text.Json.Serialization;
 using Microsoft.Azure.Functions.Extensions.Dapr.Core;
 
 namespace DotnetApp
 {
     public static class StoreFunc
     {
-        public record Order([property: JsonPropertyName("orderId")] int OrderId,
-                            [property: JsonPropertyName("quantity")] int Quantity,
-                            [property: JsonPropertyName("itemName")] string ItemName);
-
         [FunctionName("StoreFunc")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
             [DaprInvoke(AppId = "nodeapp", MethodName = "CreateNewOrder", HttpVerb = "post")] IAsyncCollector<InvokeMethodParameters> output,
             ILogger log)
         {
-            log.LogInformation("C# HTTP trigger function processed a request.");
+            log.LogInformation("C# HTTP trigger function processed a CreateNewOrder request.");
 
             Console.WriteLine("before for loop");
             for (int i = 1; i <= 3; i++)
